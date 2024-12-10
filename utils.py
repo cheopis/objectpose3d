@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def _make_homogeneous_rep_matrix(R, t):
     P = np.zeros((4,4))
     P[:3,:3] = R
@@ -10,12 +9,14 @@ def _make_homogeneous_rep_matrix(R, t):
 
 #direct linear transform
 def DLT(P1, P2, point1, point2):
-
+    P1 = -P1
+    P2 = -P2
     A = [point1[1]*P1[2,:] - P1[1,:],
          P1[0,:] - point1[0]*P1[2,:],
          point2[1]*P2[2,:] - P2[1,:],
          P2[0,:] - point2[0]*P2[2,:]
         ]
+        
     A = np.array(A).reshape((4,4))
     #print('A: ')
     #print(A)
